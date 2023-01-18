@@ -57,7 +57,7 @@ const Container = styled.div`
 
 const Main = styled.div`
   width: 100%;
-  height: 570px;
+  height: 600px;
   background: center / cover no-repeat url(${backgroundImg});
   opacity: 0.7;
 `;
@@ -65,11 +65,11 @@ const Main = styled.div`
 const slideIn = keyframes`
  from {
         transform:translateX(-10%) ;
-        color:  lightblue;
+        color:lightblue;
         background-color: transparent;
     }
     to {
-        transform:translateX(95%) ;
+        transform:translateX(90%) ;
         color:blue;
           background-color: transparent;
         
@@ -82,7 +82,7 @@ const Title = styled.div`
   font-family: var(--font-opensans);
   font-size: 50px;
   font-weight: 500;
-  opacity: 0.7;
+  opacity: 0.8;
   margin-top: 20px;
   text-align: center;
   background-color: yellow;

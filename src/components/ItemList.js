@@ -31,6 +31,19 @@ const ItemList = ({ listedItems }) => {
 
 export default ItemList;
 
+const ItemsView = styled.div`
+  width: 100%;
+  padding: 20px 0;
+  text-align: center;
+`;
+const Wrapper = styled.div`
+  width: auto;
+  padding: 10px ;
+  display: inline-grid;
+  grid-template-columns: auto auto auto auto;
+  gap: 10px;
+`;
+
 const Notification = styled.div`
   font-family: var(--font-poppins);
   width: 100%;
@@ -38,20 +51,6 @@ const Notification = styled.div`
   font-size: small;
   text-align: center;
 `;
-
-const ItemsView = styled.div`
-  width: 100%;
-  padding: 20px 0;
-  text-align: center;
-`;
-const Wrapper = styled.div`
-  padding: 10px 20px;
-  /* background-color: blue; */
-  display: inline-grid;
-  grid-template-columns: auto auto auto auto;
-  gap: 15px;
-`;
-
 const Item = styled(Link)`
   max-width: 250px;
   max-height: 280px;

@@ -59,6 +59,7 @@ ol, ul, li{
 
 body {
    width: 100vw;
+     /* overflow-x: hidden; */
       background-color: #222222;
      
 }
