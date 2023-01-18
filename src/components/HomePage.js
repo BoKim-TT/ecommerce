@@ -1,0 +1,90 @@
+import { useState, useEffect, useContext } from "react";
+import styled, { keyframes } from "styled-components";
+import { Link } from "react-router-dom";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { ShoppingContext } from "../contexts/shoppingContext";
+import backgroundImg from "../assets/background-img.jpg";
+import Loading from "./Loading";
+import ItemList from "./ItemList";
+ const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
+
+const HomePage = () => {
+  const [items, setItems] = useState();
+  const [status, setStatus] = useState("loading");
+  const [title, setTitle] = useState("hidden");
+
+  //get search state variable that was set by searchbar from useContext
+  const { search } = useContext(ShoppingContext);
+
+  // get all items
+  useEffect(() => {
+  fetch(`${API_ENDPOINT}/api/items`)
+      .then((res) => res.json())
+      .then((data) => {
+        setItems(data.data.results.slice(0, 60));
+        setStatus("idle");
+        setTitle("show");
+      });
+  }, []);
+
+  if (status === "loading") {
+    return <Loading />;
+  }
+
+  // create a filteredItem variable that will hold the items filtered based on search
+  const filteredItems = items.filter((item) => {
+    if (item.name.toLowerCase().includes(search)) {
+      return item;
+    }
+  });
+
+  return (
+    <Container>
+      <Main>
+        <Title slide={title}>Stay Active, Stay On Time</Title>
+      </Main>
+      <ItemList listedItems={filteredItems} />
+    </Container>
+  );
+};
+
+export default HomePage;
+
+const Container = styled.div`
+  width: 100%;
+  min-height: 100vh- 50px;
+`;
+
+const Main = styled.div`
+  width: 100%;
+  height: 570px;
+  background: center / cover no-repeat url(${backgroundImg});
+  opacity: 0.7;
+`;
+
+const slideIn = keyframes`
+ from {
+        transform:translateX(-10%) ;
+        color:  lightblue;
+        background-color: transparent;
+    }
+    to {
+        transform:translateX(95%) ;
+        color:blue;
+          background-color: transparent;
+        
+    }
+    `;
+
+const Title = styled.div`
+  width: 100%;
+  padding: 17px;
+  font-family: var(--font-opensans);
+  font-size: 50px;
+  font-weight: 500;
+  opacity: 0.7;
+  margin-top: 20px;
+  text-align: center;
+  background-color: yellow;
+  animation: ${slideIn} 2.5s ease-in-out;
+`;
