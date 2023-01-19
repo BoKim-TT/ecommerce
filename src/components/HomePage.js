@@ -57,7 +57,7 @@ const Container = styled.div`
 
 const Main = styled.div`
   width: 100%;
-  height: 600px;
+  height:700px;
   background: center / cover no-repeat url(${backgroundImg});
   opacity: 0.7;
 `;
