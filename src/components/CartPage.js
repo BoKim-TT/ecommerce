@@ -6,19 +6,18 @@ import CartEditForm from "./CartEditForm";
 import { IoRefresh } from "react-icons/io5";
 import Loading from "./Loading";
 import { ShoppingContext } from "../contexts/shoppingContext";
-  const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
+const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 
 const CartPage = () => {
-
   //hardcoded userName
-  const user = "Marie";
+  const user = "user";
 
   // states update by fetch result
-  const {cartItems, setCartItems} = useContext(ShoppingContext)
+  const { cartItems, setCartItems, cartCount, setCartCount } =
+    useContext(ShoppingContext);
   const [subTotal, setSubTotal] = useState(null);
+  const [status, setStatus] = useState("loading");
   const [confirm, setConfirm] = useState(false);
-
-  const { cartCount, setCartCount } = useContext(ShoppingContext);
 
   //going back to homepage when order is confirmed
   const navigate = useNavigate();
@@ -33,6 +32,7 @@ const CartPage = () => {
         }
         if (data.status === 200) {
           setCartItems(data.data.purchasedItems);
+          setStatus("idle");
 
           //calculate subtotal price of items
           const totalPrice = data.data.purchasedItems.reduce((prev, curr) => {
@@ -42,7 +42,7 @@ const CartPage = () => {
         }
       })
       .catch((err) => console.log(err));
-  }, [user]);
+  }, [user, cartCount]);
 
   //update quantity of the item function
   const updateCart = (_id, updatedPrice, editedQuantity) => {
@@ -140,7 +140,6 @@ const CartPage = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.status === 200) {
-         
           setConfirm(true);
           setCartItems(null);
           setTimeout(() => {
@@ -152,6 +151,9 @@ const CartPage = () => {
       .catch((err) => console.log(err.message));
   };
 
+  if (status === "loading") {
+    return <Loading />;
+  }
   return (
     <Wrapper>
       <Title>SHOPPING CART</Title>

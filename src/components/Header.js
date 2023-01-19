@@ -13,7 +13,7 @@ import { FilterHeader } from "./FilterHeader";
   const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 
 const Header = () => {
-  const user = "Marie";
+  const user = "user";
 
   const { search, setSearch, cartCount, setCartCount, cartItems, setCartItems } =
     useContext(ShoppingContext);
@@ -69,7 +69,7 @@ const Header = () => {
         </Cart>
 
         <Order>
-          <LinkOrder to={"/order/Marie"} onClick={clearSearch}>
+          <LinkOrder to={"/order/user"} onClick={clearSearch}>
             <IoReorderFourOutline size={25} />
           </LinkOrder>
         </Order>

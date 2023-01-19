@@ -8,7 +8,7 @@ import { ShoppingContext } from "../contexts/shoppingContext";
 const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 const ItemPage = () => {
   //hardcoded userName
-  const user = "Marie";
+  const user = "user";
 
   //itemId from path="/item/:item"
   const itemId = useParams().item;
