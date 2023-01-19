@@ -22,8 +22,7 @@ const OrderPage = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.status === 200) {
-        
-          setOrderList(data.data.orders.reverse())
+          setOrderList(data.data.orders.reverse());
         } else if (data.status === 404) {
           setOrderList(data.data);
         }
@@ -183,6 +182,7 @@ const EachItem = styled.li`
   }
 `;
 const Message = styled.div`
+color: white
   position: absolute;
   top: 300px;
   left: 0;
