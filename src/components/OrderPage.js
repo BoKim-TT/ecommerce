@@ -182,7 +182,7 @@ const EachItem = styled.li`
   }
 `;
 const Message = styled.div`
-color: white
+  color: white;
   position: absolute;
   top: 300px;
   left: 0;

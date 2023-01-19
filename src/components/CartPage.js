@@ -158,7 +158,6 @@ const CartPage = () => {
   return (
     <Wrapper>
       <Title>SHOPPING CART</Title>
-      {!cartItems && <Loading />}
       {cartItems && cartItems.length === 0 && (
         <Message>There is no item in your cart !</Message>
       )}
