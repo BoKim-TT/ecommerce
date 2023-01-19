@@ -29,6 +29,7 @@ const CartPage = () => {
       .then((data) => {
         if (data.message === "cart not found") {
           setCartItems([]);
+          setStatus("idle");
         }
         if (data.status === 200) {
           setCartItems(data.data.purchasedItems);
