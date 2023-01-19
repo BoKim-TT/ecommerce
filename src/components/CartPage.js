@@ -144,7 +144,6 @@ const CartPage = () => {
           setConfirm(true);
           setCartItems(null);
           setTimeout(() => {
-            setConfirm(false);
             navigate("/");
           }, 1200);
         }
@@ -158,7 +157,7 @@ const CartPage = () => {
   return (
     <Wrapper>
       <Title>SHOPPING CART</Title>
-      {cartItems && cartItems.length === 0 && (
+      {cartItems && !confirm && cartItems.length === 0 && (
         <Message>There is no item in your cart !</Message>
       )}
       {cartItems && cartItems.length > 0 && (
