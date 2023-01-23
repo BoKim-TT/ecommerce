@@ -27,20 +27,21 @@ const CartPage = () => {
     fetch(`${API_ENDPOINT}/api/cart/${user}`)
       .then((res) => res.json())
       .then((data) => {
+        console.log('-------', data)
         if (data.status !== 200) {
           setCartItems([]);
           setStatus("idle");
-          return;
         }
+        if (data.status === 200) {
+          setCartItems(data.data.purchasedItems);
+          setStatus("idle");
 
-        setCartItems(data.data.purchasedItems);
-        setStatus("idle");
-
-        //calculate subtotal price of items
-        const totalPrice = data.data.purchasedItems.reduce((prev, curr) => {
-          return prev + Number(curr.price.slice(1)) * curr.quantity;
-        }, 0);
-        setSubTotal(totalPrice.toFixed(2));
+          //calculate subtotal price of items
+          const totalPrice = data.data.purchasedItems.reduce((prev, curr) => {
+            return prev + Number(curr.price.slice(1)) * curr.quantity;
+          }, 0);
+          setSubTotal(totalPrice.toFixed(2));
+        }
       })
       .catch((err) => console.log(err));
   }, [user, cartCount]);

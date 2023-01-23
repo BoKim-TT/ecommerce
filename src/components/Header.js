@@ -25,21 +25,25 @@ const Header = () => {
   } = useContext(ShoppingContext);
 
   useEffect(() => {
-    fetch(`${API_ENDPOINT}/api/cart/${user}`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.status !== 200) {
-          setCartCount(0);
-          return;
-        }
-
-        setCartCount(
-          data.data.purchasedItems.reduce((accu, curr) => {
-            return accu + Number(curr.quantity);
-          }, 0)
-        );
-      })
-      .catch((err) => console.log(err));
+    try {
+      fetch(`${API_ENDPOINT}/api/cart/${user}`)
+        .then((res) => res.json())
+        .then((data) => {
+          console.log("-------", data);
+          if (data.status !== 200) {
+            setCartCount(0);
+          }
+          if (data.status === 200) {
+            setCartCount(
+              data.data.purchasedItems.reduce((accu, curr) => {
+                return accu + Number(curr.quantity);
+              }, 0)
+            );
+          }
+        });
+    } catch (err) {
+      console.log(err);
+    }
   }, [cartItems]);
 
   const clearSearch = () => {
