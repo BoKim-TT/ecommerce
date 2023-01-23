@@ -6,7 +6,7 @@ import { ShoppingContext } from "../contexts/shoppingContext";
 import backgroundImg from "../assets/background-img.jpg";
 import Loading from "./Loading";
 import ItemList from "./ItemList";
- const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
+const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 
 const HomePage = () => {
   const [items, setItems] = useState();
@@ -18,7 +18,7 @@ const HomePage = () => {
 
   // get all items
   useEffect(() => {
-  fetch(`${API_ENDPOINT}/api/items`)
+    fetch(`${API_ENDPOINT}/api/items`)
       .then((res) => res.json())
       .then((data) => {
         setItems(data.data.results.slice(0, 60));
@@ -40,9 +40,11 @@ const HomePage = () => {
 
   return (
     <Container>
-      <Main>
-        <Title slide={title}>Stay Active, Stay On Time</Title>
-      </Main>
+      {search.length === 0 && (
+        <Main>
+          <Title slide={title}>Stay Active, Stay On Time</Title>
+        </Main>
+      )}
       <ItemList listedItems={filteredItems} />
     </Container>
   );
@@ -57,7 +59,7 @@ const Container = styled.div`
 
 const Main = styled.div`
   width: 100%;
-  height:700px;
+  height: 700px;
   background: center / cover no-repeat url(${backgroundImg});
   opacity: 0.7;
 `;

@@ -140,17 +140,18 @@ const Wrapper = styled.div`
 const Container = styled.div`
   width: 90%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: flex-end;
   margin: 1%;
-  padding: 1%;
-  padding-bottom: 5%;
+  padding: 5% 1%;
+
   border: 0.3px solid yellow;
 `;
 const ItemContainer = styled.div`
   width: 75%;
   height: 380px;
- 
+
+
   @media (max-width: 768px) {
     width: 80%;
     height: 500px;
@@ -165,7 +166,7 @@ const PurchaseBox = styled.div`
   background-color: white;
   width: 20%;
   height: 95px;
-  margin: 340px 10px 0 20px;
+  /* margin: 340px 10px 0 20px; */
   /* border-radius: 12px; */
   display: flex;
   flex-direction: column;
@@ -182,8 +183,8 @@ const PurchaseBox = styled.div`
 const AddButton = styled.button`
   width: 80%;
   height: 35px;
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 500;
   background-color: blue;
   color: white;
   text-align: center;
