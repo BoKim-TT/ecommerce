@@ -3,43 +3,49 @@ import {
   IoCartOutline,
   IoStorefront,
   IoSearch,
-  IoReorderFourOutline,
+  IoList,
 } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useContext, useEffect } from "react";
 import { ShoppingContext } from "../contexts/shoppingContext";
 import { FilterHeader } from "./FilterHeader";
-  const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
+const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 
 const Header = () => {
   const user = "user";
 
-  const { search, setSearch, cartCount, setCartCount, cartItems, setCartItems } =
-    useContext(ShoppingContext);
+  const {
+    search,
+    setSearch,
+    cartCount,
+    setCartCount,
+    cartItems,
+    setCartItems,
+  } = useContext(ShoppingContext);
 
   useEffect(() => {
-  fetch(`${API_ENDPOINT}/api/cart/${user}`)
+    fetch(`${API_ENDPOINT}/api/cart/${user}`)
       .then((res) => res.json())
       .then((data) => {
-        if (data.message === "cart not found") {
-          setCartCount(0)
+        if (data.status !== 200) {
+          setCartCount(0);
+          return;
         }
-        if (data.status === 200) {
-          setCartCount(
-            data.data.purchasedItems.reduce((accu, curr) => {
-              return accu + Number(curr.quantity);
-            }, 0)
-          );
-        }
+
+        setCartCount(
+          data.data.purchasedItems.reduce((accu, curr) => {
+            return accu + Number(curr.quantity);
+          }, 0)
+        );
       })
       .catch((err) => console.log(err));
-  }, [cartCount, cartItems]);
+  }, [cartItems]);
 
   const clearSearch = () => {
     setSearch("");
   };
-  
+
   return (
     <Wrapper>
       <Logo>
@@ -70,7 +76,7 @@ const Header = () => {
 
         <Order>
           <LinkOrder to={"/order/user"} onClick={clearSearch}>
-            <IoReorderFourOutline size={25} />
+            <IoList size={25} />
           </LinkOrder>
         </Order>
       </Icons>
@@ -106,21 +112,19 @@ const HomeLink = styled(Link)`
 `;
 
 const Icons = styled.div`
-  /* background-color:yellow; */
   width: 20%;
   height: 50px;
-  margin-right:2%;
+  margin-right: 2%;
   display: flex;
   justify-content: space-between;
   align-items: center;
 `;
 const SearchContainer = styled.div`
   /* background-color: green; */
-  width:60%;
+  width: 55%;
   height: 30px;
   display: flex;
   align-items: center;
- 
 `;
 const SearchIcon = styled.div`
   margin: 0 5px;
@@ -133,8 +137,8 @@ const SearchBar = styled.input`
 `;
 
 const Cart = styled.div`
-  /* background-color: blue; */
-  width: 25px;
+  text-align: center;
+  width: 20%;
   height: 25px;
   position: relative;
   :hover {
@@ -162,14 +166,13 @@ const ItemInCart = styled.div`
   background-color: yellowgreen;
   text-align: center;
   position: absolute;
-  right: -8px;
-  bottom: -8px;
+  right: -2px;
+  bottom: -7px;
 `;
 const Order = styled.div`
-  /* background-color: gray; */
-  width: 25px;
+  width: 20%;
   height: 25px;
-
+  text-align: center;
   :hover {
     cursor: pointer;
     opacity: 0.6;

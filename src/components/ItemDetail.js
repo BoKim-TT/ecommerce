@@ -21,6 +21,9 @@ const ItemDetail = ({ item, company, detailed }) => {
             <Quantity>
               Quantity :<Span> {item.quantity}</Span>
             </Quantity>
+            <Stock>
+              Available Stock :<StockSpan> {item.numInStock}</StockSpan>
+            </Stock>
           </>
         )}
         <Category>Category: {item.category}</Category>
@@ -31,7 +34,10 @@ const ItemDetail = ({ item, company, detailed }) => {
               {company.name}, {company.country}
             </CompanyName>
             {"  "}
-            <CompanyURL href={company.url} target="_blank"> {company.url} </CompanyURL>
+            <CompanyURL href={company.url} target="_blank">
+              {" "}
+              {company.url}{" "}
+            </CompanyURL>
           </Company>
         )}
       </Description>
@@ -140,10 +146,11 @@ const Span = styled.span`
     font-size: 12px;
   }
 `;
-const StockNum = styled(Span)`
-  color: var(--color-font-darkgray);
-  font-weight: 400;
+const StockSpan = styled.span`
+  color: black;
+  font-size: 12px;
 `;
+
 const Category = styled.p`
   margin: 10px 0;
   font-size: 13px;

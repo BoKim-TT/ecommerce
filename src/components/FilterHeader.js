@@ -56,7 +56,7 @@ export const FilterHeader = () => {
             to={`/items/category/Pets%20and%20Animals`}
             onClick={categorySearch}
           >
-            Pets and Animals
+            Pets
           </NavLink>
         </SearchList>
       </Filter>

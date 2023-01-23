@@ -27,20 +27,20 @@ const CartPage = () => {
     fetch(`${API_ENDPOINT}/api/cart/${user}`)
       .then((res) => res.json())
       .then((data) => {
-        if (data.message === "cart not found") {
+        if (data.status !== 200) {
           setCartItems([]);
           setStatus("idle");
+          return;
         }
-        if (data.status === 200) {
-          setCartItems(data.data.purchasedItems);
-          setStatus("idle");
 
-          //calculate subtotal price of items
-          const totalPrice = data.data.purchasedItems.reduce((prev, curr) => {
-            return prev + Number(curr.price.slice(1)) * curr.quantity;
-          }, 0);
-          setSubTotal(totalPrice.toFixed(2));
-        }
+        setCartItems(data.data.purchasedItems);
+        setStatus("idle");
+
+        //calculate subtotal price of items
+        const totalPrice = data.data.purchasedItems.reduce((prev, curr) => {
+          return prev + Number(curr.price.slice(1)) * curr.quantity;
+        }, 0);
+        setSubTotal(totalPrice.toFixed(2));
       })
       .catch((err) => console.log(err));
   }, [user, cartCount]);
@@ -260,7 +260,6 @@ const CheckOut = styled.button`
     opacity: 0.8;
     transform: scale(0.95);
   }
-
   @media (max-width: 768px) {
     width: 80%;
     height: 35px;

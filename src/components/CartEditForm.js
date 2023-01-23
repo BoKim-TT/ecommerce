@@ -36,7 +36,7 @@ const CartEditForm = ({ item, updateCart, delelteItem }) => {
       <Form>
         {!message ? (
           <Inputfield>
-            <Label for="quantity">QTY :</Label>
+            <Label for="quantity">QTY </Label>
             <Input
               type="number"
               min="0"
