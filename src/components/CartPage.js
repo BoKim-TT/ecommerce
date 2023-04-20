@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
 import ItemDetail from "./ItemDetail";
 import CartEditForm from "./CartEditForm";
-import { IoRefresh } from "react-icons/io5";
 import Loading from "./Loading";
 import { ShoppingContext } from "../contexts/shoppingContext";
 const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
@@ -27,7 +26,6 @@ const CartPage = () => {
     fetch(`${API_ENDPOINT}/api/cart/${user}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log('-------', data)
         if (data.status !== 200) {
           setCartItems([]);
           setStatus("idle");

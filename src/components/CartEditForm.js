@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const CartEditForm = ({ item, updateCart, delelteItem }) => {
   const [editedQuantity, setEditedQuantity] = useState(item.quantity);

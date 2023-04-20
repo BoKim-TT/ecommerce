@@ -1,14 +1,14 @@
-import { useEffect, useState, useContext } from "react";
-import { useParams } from "react-router-dom";
-import styled from "styled-components";
-import ItemDetail from "./ItemDetail";
-import { IoRefresh } from "react-icons/io5";
-import { ShoppingContext } from "../contexts/shoppingContext";
-import Loading from "./Loading";
+import { useEffect, useState, useContext } from 'react';
+import { useParams } from 'react-router-dom';
+import styled from 'styled-components';
+import ItemDetail from './ItemDetail';
+import { IoRefresh } from 'react-icons/io5';
+import { ShoppingContext } from '../contexts/shoppingContext';
+import Loading from './Loading';
 const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 
 const OrderPage = () => {
-  const [orderList, setOrderList] = useState(null);
+  const [orderList, setOrderList] = useState([]);
 
   //when order page is opened we get the user from params
   const user = useParams().user;
@@ -35,11 +35,9 @@ const OrderPage = () => {
   }
 
   // create a filteredItem variable that will hold the items in the category filtered based on search
-  const filteredItems = orderList.filter((order) => {
-    if (order._id.toLowerCase().includes(search)) {
-      return order;
-    }
-  });
+  const filteredItems = orderList.filter((order) =>
+    order._id.toLowerCase().includes(search)
+  );
 
   return (
     <Wrapper>
@@ -50,43 +48,32 @@ const OrderPage = () => {
       )}
       {orderList && orderList.length > 0 && (
         <Container>
-          {
-            //if the filteredItems array has no orders tell the user
-            filteredItems.length === 0 ? (
-              <Message>
-                Looks like nothing matches your search... Please try another
-                order number.
-              </Message>
-            ) : (
-              //display the order that matches in the search bar
-              filteredItems.map((order) => {
-                const totalPrice = order.purchasedItems.reduce((prev, curr) => {
-                  return prev + Number(curr.price.slice(1)) * curr.quantity;
-                }, 0);
+          {orderList.map((order) => {
+            const totalPrice = order.purchasedItems.reduce((prev, curr) => {
+              return prev + Number(curr.price.slice(1)) * curr.quantity;
+            }, 0);
 
-                return (
-                  <Order key={order._id}>
-                    <Head>
-                      <OrderNumber>
-                        order date: <Span>{order.date} </Span>
-                      </OrderNumber>
-                      <SubTotal>
-                        Subtotal: $ <Span>{totalPrice.toFixed(2)}</Span>
-                      </SubTotal>
-                    </Head>
+            return (
+              <Order key={order._id}>
+                <Head>
+                  <OrderNumber>
+                    order date: <Span>{order.date} </Span>
+                  </OrderNumber>
+                  <SubTotal>
+                    Subtotal: $ <Span>{totalPrice.toFixed(2)}</Span>
+                  </SubTotal>
+                </Head>
 
-                    {order.purchasedItems.map((item) => {
-                      return (
-                        <EachItem key={item._id}>
-                          <ItemDetail item={item} detailed="false" />
-                        </EachItem>
-                      );
-                    })}
-                  </Order>
-                );
-              })
-            )
-          }
+                {order.purchasedItems.map((item) => {
+                  return (
+                    <EachItem key={item._id}>
+                      <ItemDetail item={item} detailed="false" />
+                    </EachItem>
+                  );
+                })}
+              </Order>
+            );
+          })}
         </Container>
       )}
     </Wrapper>

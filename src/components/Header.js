@@ -1,7 +1,6 @@
 import {
   IoBowlingBall,
   IoCartOutline,
-  IoStorefront,
   IoSearch,
   IoList,
 } from "react-icons/io5";
@@ -21,7 +20,6 @@ const Header = () => {
     cartCount,
     setCartCount,
     cartItems,
-    setCartItems,
   } = useContext(ShoppingContext);
 
   useEffect(() => {
@@ -29,7 +27,6 @@ const Header = () => {
       fetch(`${API_ENDPOINT}/api/cart/${user}`)
         .then((res) => res.json())
         .then((data) => {
-          console.log("-------", data);
           if (data.status !== 200) {
             setCartCount(0);
           }
@@ -191,8 +188,3 @@ const LinkOrder = styled(Link)`
   }
 `;
 
-const Span = styled.span`
-  text-align: center;
-  font-size: 11px;
-  font-family: var(--font-poppins);
-`;
