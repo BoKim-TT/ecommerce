@@ -1,12 +1,12 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import GlobalStyles from "./GlobalStyles";
-import Header from "./Header";
-import HomePage from "./HomePage";
-import ItemPage from "./ItemPage";
-import CartPage from "./CartPage";
-import Category from "./Category";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import GlobalStyles from './GlobalStyles';
+import Header from './Header';
+import HomePage from './HomePage';
+import ItemPage from './ItemPage';
+import CartPage from './CartPage';
+import Category from './Category';
 // import FilterHeader from "./FilterHeader";
-import OrderPage from "./OrderPage";
+import OrderPage from './OrderPage';
 
 const App = () => {
   return (

@@ -1,21 +1,21 @@
-import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
-import { useEffect, useState, useContext } from "react";
-import ItemDetail from "./ItemDetail";
-import CartEditForm from "./CartEditForm";
-import Loading from "./Loading";
-import { ShoppingContext } from "../contexts/shoppingContext";
+import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+import { useEffect, useState, useContext } from 'react';
+import ItemDetail from './ItemDetail';
+import CartEditForm from './CartEditForm';
+import Loading from './Loading';
+import { ShoppingContext } from '../contexts/shoppingContext';
 const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 
 const CartPage = () => {
   //hardcoded userName
-  const user = "user";
+  const user = 'user';
 
   // states update by fetch result
   const { cartItems, setCartItems, cartCount, setCartCount } =
     useContext(ShoppingContext);
   const [subTotal, setSubTotal] = useState(null);
-  const [status, setStatus] = useState("loading");
+  const [status, setStatus] = useState('loading');
   const [confirm, setConfirm] = useState(false);
 
   //going back to homepage when order is confirmed
@@ -28,11 +28,11 @@ const CartPage = () => {
       .then((data) => {
         if (data.status !== 200) {
           setCartItems([]);
-          setStatus("idle");
+          setStatus('idle');
         }
         if (data.status === 200) {
           setCartItems(data.data.purchasedItems);
-          setStatus("idle");
+          setStatus('idle');
 
           //calculate subtotal price of items
           const totalPrice = data.data.purchasedItems.reduce((prev, curr) => {
@@ -55,10 +55,10 @@ const CartPage = () => {
     const update = { itemId: _id, quantity: editedQuantity };
 
     fetch(`${API_ENDPOINT}/api/cart/${user}`, {
-      method: "PATCH",
+      method: 'PATCH',
       body: JSON.stringify(update),
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     })
       .then((res) => res.json())
@@ -93,10 +93,10 @@ const CartPage = () => {
   const handleDelteItem = (_id) => {
     // DELETE request: deleteItem from user's cart
     fetch(`${API_ENDPOINT}/api/cart/${user}`, {
-      method: "DELETE",
+      method: 'DELETE',
       body: JSON.stringify({ _id }),
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     })
       .then((res) => res.json())
@@ -131,10 +131,10 @@ const CartPage = () => {
 
     // POST request : creating a new order
     fetch(`${API_ENDPOINT}/api/order/${user}`, {
-      method: "POST",
+      method: 'POST',
       body: JSON.stringify(orderObject),
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     })
       .then((res) => res.json())
@@ -143,21 +143,21 @@ const CartPage = () => {
           setConfirm(true);
           setCartItems(null);
           setTimeout(() => {
-            navigate("/");
+            navigate('/');
           }, 1200);
         }
       })
       .catch((err) => console.log(err.message));
   };
 
-  if (status === "loading") {
+  if (status === 'loading') {
     return <Loading />;
   }
   return (
     <Wrapper>
       <Title>SHOPPING CART</Title>
       {cartItems && !confirm && cartItems.length === 0 && (
-        <Message>There is no item in your cart !</Message>
+        <Message>Your cart is currently empty</Message>
       )}
       {cartItems && cartItems.length > 0 && (
         <Container>
@@ -174,7 +174,7 @@ const CartPage = () => {
             );
           })}
           <CheckoutContainer>
-            {" "}
+            {' '}
             <SubTotal> Subtotal: $ {subTotal}</SubTotal>
             <CheckOut onClick={handleCheckOut}>CHECKOUT</CheckOut>
           </CheckoutContainer>

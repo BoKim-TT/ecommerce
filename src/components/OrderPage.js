@@ -8,7 +8,7 @@ import Loading from './Loading';
 const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 
 const OrderPage = () => {
-  const [orderList, setOrderList] = useState([]);
+  const [orderList, setOrderList] = useState(null);
 
   //when order page is opened we get the user from params
   const user = useParams().user;
@@ -30,23 +30,18 @@ const OrderPage = () => {
       .catch((err) => console.log(err));
   }, [user]);
 
+  console.log(orderList);
+
   if (!orderList) {
     return <Loading />;
   }
-
-  // create a filteredItem variable that will hold the items in the category filtered based on search
-  const filteredItems = orderList.filter((order) =>
-    order._id.toLowerCase().includes(search)
-  );
 
   return (
     <Wrapper>
       <Title> ORDER HISTORY</Title>
 
-      {orderList && orderList.length === 0 && (
-        <Message>There are no orders for this user!</Message>
-      )}
-      {orderList && orderList.length > 0 && (
+      {orderList.length === 0 && <Message>No orders found for you </Message>}
+      {orderList.length > 0 && (
         <Container>
           {orderList.map((order) => {
             const totalPrice = order.purchasedItems.reduce((prev, curr) => {
