@@ -34,8 +34,6 @@ const ItemPage = () => {
     }
   }, [itemId]);
 
-
-
   //when item data received, fetch getCompany by the companyId
   useEffect(() => {
     if (item) {
@@ -144,9 +142,8 @@ const Container = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: flex-end;
-  margin: 1%;
+  margin: 7%;
   padding: 5% 1%;
-
   border: 0.3px solid yellow;
 `;
 const ItemContainer = styled.div`

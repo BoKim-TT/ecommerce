@@ -49,5 +49,5 @@ export default Category;
 
 const Container = styled.div`
   min-height: 100vh;
-  padding-top: 5%;
+  padding-top: 1%;
 `;

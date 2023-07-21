@@ -55,6 +55,8 @@ const Wrapper = styled.div`
   display: inline-grid;
   grid-template-columns: auto auto auto auto;
   gap: 20px;
+  justify-content: space-between;
+  /* background-color: aliceblue; */
 `;
 
 const Notification = styled.div`
