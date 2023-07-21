@@ -1,14 +1,14 @@
-import { useEffect, useState, useContext } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import { AiFillCheckCircle } from "react-icons/ai";
-import ItemDetail from "./ItemDetail";
-import Loading from "./Loading";
-import { ShoppingContext } from "../contexts/shoppingContext";
+import { useEffect, useState, useContext } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import { AiFillCheckCircle } from 'react-icons/ai';
+import ItemDetail from './ItemDetail';
+import Loading from './Loading';
+import { ShoppingContext } from '../contexts/shoppingContext';
 const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 const ItemPage = () => {
   //hardcoded userName
-  const user = "user";
+  const user = 'user';
 
   //itemId from path="/item/:item"
   const itemId = useParams().item;
@@ -34,6 +34,8 @@ const ItemPage = () => {
     }
   }, [itemId]);
 
+
+
   //when item data received, fetch getCompany by the companyId
   useEffect(() => {
     if (item) {
@@ -51,10 +53,10 @@ const ItemPage = () => {
     // POST request : create cart
 
     fetch(`${API_ENDPOINT}/api/cart/${user}`, {
-      method: "POST",
+      method: 'POST',
       body: JSON.stringify({ ...item, quantity }),
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     })
       .then((res) => res.json())
@@ -64,7 +66,7 @@ const ItemPage = () => {
           setMessage(true);
           setTimeout(() => {
             setMessage(false);
-            navigate("/");
+            navigate('/');
           }, 1000);
         }
       })
@@ -96,10 +98,10 @@ const ItemPage = () => {
                       id="quantity"
                       name="quantity"
                       min="0"
-                      max={item.numInStock + ""}
+                      max={item.numInStock + ''}
                       value={quantity}
                       onChange={(ev) => setQuantity(Number(ev.target.value))}
-                    />{" "}
+                    />{' '}
                   </Quantity>
                 )}
 
@@ -150,7 +152,6 @@ const Container = styled.div`
 const ItemContainer = styled.div`
   width: 75%;
   height: 380px;
-
 
   @media (max-width: 768px) {
     width: 80%;

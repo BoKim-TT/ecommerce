@@ -3,24 +3,19 @@ import {
   IoCartOutline,
   IoSearch,
   IoList,
-} from "react-icons/io5";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import { useContext, useEffect } from "react";
-import { ShoppingContext } from "../contexts/shoppingContext";
-import { FilterHeader } from "./FilterHeader";
+} from 'react-icons/io5';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import { useContext, useEffect } from 'react';
+import { ShoppingContext } from '../contexts/shoppingContext';
+import { FilterHeader } from './FilterHeader';
 const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 
 const Header = () => {
-  const user = "user";
+  const user = 'user';
 
-  const {
-    search,
-    setSearch,
-    cartCount,
-    setCartCount,
-    cartItems,
-  } = useContext(ShoppingContext);
+  const { search, setSearch, cartCount, setCartCount, cartItems } =
+    useContext(ShoppingContext);
 
   useEffect(() => {
     try {
@@ -44,13 +39,13 @@ const Header = () => {
   }, [cartItems]);
 
   const clearSearch = () => {
-    setSearch("");
+    setSearch('');
   };
 
   return (
     <Wrapper>
       <Logo>
-        <HomeLink to={"/"} onClick={clearSearch}>
+        <HomeLink to={'/'} onClick={clearSearch}>
           <IoBowlingBall size={40} />
         </HomeLink>
       </Logo>
@@ -69,14 +64,14 @@ const Header = () => {
           ></SearchBar>
         </SearchContainer>
         <Cart>
-          <LinkCart to={"/cart"} onClick={clearSearch}>
+          <LinkCart to={'/cart'} onClick={clearSearch}>
             {cartCount !== 0 && <ItemInCart>{cartCount}</ItemInCart>}
             <IoCartOutline size={25} />
           </LinkCart>
         </Cart>
 
         <Order>
-          <LinkOrder to={"/order/user"} onClick={clearSearch}>
+          <LinkOrder to={'/order/user'} onClick={clearSearch}>
             <IoList size={25} />
           </LinkOrder>
         </Order>
@@ -187,4 +182,3 @@ const LinkOrder = styled(Link)`
     opacity: 0.6;
   }
 `;
-

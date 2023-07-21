@@ -19,7 +19,7 @@ const HomePage = () => {
     fetch(`${API_ENDPOINT}/api/items`)
       .then((res) => res.json())
       .then((data) => {
-        setItems(data.data.results.slice(0, 60));
+        setItems(data.data.results.slice(0, 16));
         setStatus('idle');
         setTitle('show');
       });
@@ -38,7 +38,7 @@ const HomePage = () => {
     <Container>
       {search.length === 0 && (
         <Main>
-          <Title slide={title}>Stay Active, Stay On Time</Title>
+          <Title>Stay Active, Stay On Time</Title>
         </Main>
       )}
       <ItemList listedItems={filteredItems} />
@@ -70,7 +70,7 @@ const slideIn = keyframes`
         transform:translateX(90%) ;
         color:blue;
           background-color: transparent;
-        
+
     }
     `;
 
@@ -84,5 +84,5 @@ const Title = styled.div`
   margin-top: 20px;
   text-align: center;
   background-color: yellow;
-  animation: ${slideIn} 2.5s ease-in-out;
+  animation: ${slideIn} 1s ease-in-out;
 `;

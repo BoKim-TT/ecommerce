@@ -1,13 +1,13 @@
-import { useState, useEffect, useContext } from "react";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { SearchBarContext, ShoppingContext } from "../contexts/shoppingContext";
-import backgroundImg from "../assets/background-img.jpg";
+import { useState, useEffect, useContext } from 'react';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { SearchBarContext, ShoppingContext } from '../contexts/shoppingContext';
+import backgroundImg from '../assets/background-img.jpg';
 
 const ItemList = ({ listedItems }) => {
-  const {setSearch} = useContext(ShoppingContext)
-   const clearSearch = () => {
-    setSearch("");
+  const { setSearch } = useContext(ShoppingContext);
+  const clearSearch = () => {
+    setSearch('');
   };
   return (
     <ItemsView>
@@ -20,8 +20,17 @@ const ItemList = ({ listedItems }) => {
             //display items based on what is serached in search bar will show everything if nothing is typed
             listedItems.map((item) => {
               return (
-                <Item key={item._id} to={`/item/${item._id}`} onClick={clearSearch}>
-                  <Img key={item._id} src={item.imageSrc} alt={item.name} />
+                <Item
+                  key={item._id}
+                  to={`/item/${item._id}`}
+                  onClick={clearSearch}
+                >
+                  <Img
+                    key={item._id}
+                    src={item.imageSrc}
+                    alt={item.name}
+                    loading="lazy"
+                  />
                   <Name>{item.name}</Name>
                 </Item>
               );
@@ -41,11 +50,11 @@ const ItemsView = styled.div`
   text-align: center;
 `;
 const Wrapper = styled.div`
-  width: auto;
-  padding: 10px ;
+  width: 85%;
+  padding: 10px;
   display: inline-grid;
   grid-template-columns: auto auto auto auto;
-  gap: 10px;
+  gap: 20px;
 `;
 
 const Notification = styled.div`
