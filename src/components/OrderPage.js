@@ -2,9 +2,9 @@ import { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import ItemDetail from './ItemDetail';
-import { IoRefresh } from 'react-icons/io5';
 import { ShoppingContext } from '../contexts/shoppingContext';
 import Loading from './Loading';
+import Alert from '@mui/material/Alert';
 const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 
 const OrderPage = () => {
@@ -40,7 +40,19 @@ const OrderPage = () => {
     <Wrapper>
       <Title> ORDER HISTORY</Title>
 
-      {orderList.length === 0 && <Message>No orders found for you </Message>}
+      {orderList.length === 0 && (
+        <Alert
+          icon={false}
+          sx={{
+            margin: '5% auto',
+            fontSize: '20px',
+            width: '500px',
+            '& .MuiAlert-message': { textAlign: 'center', width: 'inherit' },
+          }}
+        >
+          No orders found for you !{' '}
+        </Alert>
+      )}
       {orderList.length > 0 && (
         <Container>
           {orderList.map((order) => {

@@ -4,6 +4,7 @@ import { ShoppingContext } from '../contexts/shoppingContext';
 import backgroundImg from '../assets/background-img.jpg';
 import Loading from './Loading';
 import ItemList from './ItemList';
+
 const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 
 const HomePage = () => {
@@ -84,5 +85,5 @@ const Title = styled.div`
   margin-top: 20px;
   text-align: center;
   background-color: yellow;
-  animation: ${slideIn} 1s ease-in-out;
+  // animation: ${slideIn} 1.s ease-in-out;
 `;

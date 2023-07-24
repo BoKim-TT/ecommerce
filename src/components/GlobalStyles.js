@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
 :root {
@@ -20,7 +20,7 @@ export default createGlobalStyle`
   /* font size */
   --font-large: 48px;
   --font-medium: 28px;
-  --font-regular: 16px;
+  --font-regular: 18px;
   --font-small: 14px;
   --font-micro: 12px;
 

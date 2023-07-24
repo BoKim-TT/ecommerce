@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { SearchBarContext, ShoppingContext } from '../contexts/shoppingContext';
 import backgroundImg from '../assets/background-img.jpg';
+import Alert from '@mui/material/Alert';
 
 const ItemList = ({ listedItems }) => {
   const { setSearch } = useContext(ShoppingContext);
@@ -15,7 +16,20 @@ const ItemList = ({ listedItems }) => {
         {
           //if the filteredItems array has no items tell the user
           listedItems.length === 0 ? (
-            <Notification>Nothing matches your search...</Notification>
+            <Alert
+              icon={false}
+              sx={{
+                margin: '5% auto',
+                fontSize: '20px',
+                width: '100%',
+                '& .MuiAlert-message': {
+                  textAlign: 'center',
+                  width: 'inherit',
+                },
+              }}
+            >
+              There are no items that match your search!
+            </Alert>
           ) : (
             //display items based on what is serached in search bar will show everything if nothing is typed
             listedItems.map((item) => {
@@ -59,13 +73,6 @@ const Wrapper = styled.div`
   /* background-color: aliceblue; */
 `;
 
-const Notification = styled.div`
-  font-family: var(--font-poppins);
-  width: 100%;
-  color: white;
-  font-size: small;
-  text-align: center;
-`;
 const Item = styled(Link)`
   max-width: 250px;
   max-height: 280px;

@@ -83,7 +83,6 @@ const Header = () => {
 export default Header;
 
 const Wrapper = styled.div`
-  /* background-color:#D8D8D8; */
   width: 100%;
   height: fit-content;
   min-height: 80px;
@@ -108,7 +107,7 @@ const HomeLink = styled(Link)`
 `;
 
 const Icons = styled.div`
-  width: 20%;
+  width: 25%;
   height: 50px;
   margin-right: 2%;
   display: flex;
@@ -116,11 +115,11 @@ const Icons = styled.div`
   align-items: center;
 `;
 const SearchContainer = styled.div`
-  /* background-color: green; */
-  width: 55%;
-  height: 30px;
+  width: 70%;
+  height: 45px;
   display: flex;
   align-items: center;
+  // border: 2px solid red;
 `;
 const SearchIcon = styled.div`
   margin: 0 5px;
@@ -128,8 +127,8 @@ const SearchIcon = styled.div`
 
 const SearchBar = styled.input`
   border: 1px solid var(--color-font-darkgray);
-  height: 17px;
-  width: 70%;
+  height: 25px;
+  width: 80%;
 `;
 
 const Cart = styled.div`

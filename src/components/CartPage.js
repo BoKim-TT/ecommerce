@@ -5,6 +5,7 @@ import ItemDetail from './ItemDetail';
 import CartEditForm from './CartEditForm';
 import Loading from './Loading';
 import { ShoppingContext } from '../contexts/shoppingContext';
+import Alert from '@mui/material/Alert';
 const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 
 const CartPage = () => {
@@ -157,7 +158,17 @@ const CartPage = () => {
     <Wrapper>
       <Title>SHOPPING CART</Title>
       {cartItems && !confirm && cartItems.length === 0 && (
-        <Message>Your cart is currently empty</Message>
+        <Alert
+          icon={false}
+          sx={{
+            margin: '5% auto',
+            fontSize: '20px',
+            width: '500px',
+            '& .MuiAlert-message': { textAlign: 'center', width: 'inherit' },
+          }}
+        >
+          Your cart is currently empty !{' '}
+        </Alert>
       )}
       {cartItems && cartItems.length > 0 && (
         <Container>

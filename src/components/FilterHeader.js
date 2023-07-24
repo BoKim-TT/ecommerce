@@ -76,7 +76,6 @@ const Filter = styled.ul`
   height: 100%;
   display: flex;
   align-items: center;
-  /* background-color: green; */
   display: flex;
   justify-content: space-between;
 `;
