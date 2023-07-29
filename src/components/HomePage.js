@@ -26,9 +26,9 @@ const HomePage = () => {
   //     });
   // }, []);
 
-  if (status === 'loading') {
-    return <Loading />;
-  }
+  // if (status === 'loading') {
+  //   return <Loading />;
+  // }
 
   // create a filteredItem variable that will hold the items filtered based on search
   // const filteredItems = items.filter((item) =>
