@@ -58,9 +58,11 @@ ol, ul, li{
   }
 
 body {
-   width: 100vw;
+   width: 100%;
+     background-color: #222222;
      /* overflow-x: hidden; */
-      background-color: #222222;
+    
+   
      
 }
 

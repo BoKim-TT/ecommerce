@@ -9,13 +9,20 @@ import styled from 'styled-components';
 import { useContext, useEffect } from 'react';
 import { ShoppingContext } from '../contexts/shoppingContext';
 import { FilterHeader } from './FilterHeader';
+import { useLocation } from 'react-router-dom';
 const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
+
+const routesWithoutSearchBox = ['/', '/order/user', '/cart'];
 
 const Header = () => {
   const user = 'user';
-
+  const location = useLocation();
   const { search, setSearch, cartCount, setCartCount, cartItems } =
     useContext(ShoppingContext);
+
+  const isSearchBoxVisible = !routesWithoutSearchBox.includes(
+    location.pathname
+  );
 
   useEffect(() => {
     try {
@@ -44,25 +51,27 @@ const Header = () => {
 
   return (
     <Wrapper>
-      <Logo>
+      <HomeLogo>
         <HomeLink to={'/'} onClick={clearSearch}>
           <IoBowlingBall size={40} />
         </HomeLink>
-      </Logo>
+      </HomeLogo>
       <FilterHeader />
-      <Icons>
-        <SearchContainer>
-          <SearchIcon>
-            <IoSearch size={16} />
-          </SearchIcon>
-          <SearchBar
-            className="input"
-            onChange={(e) => {
-              setSearch(e.target.value.toLowerCase());
-            }}
-            value={search}
-          ></SearchBar>
-        </SearchContainer>
+      <Icons isSearchBoxVisible={isSearchBoxVisible}>
+        {isSearchBoxVisible && (
+          <SearchContainer>
+            <SearchIcon>
+              <IoSearch size={16} />
+            </SearchIcon>
+            <SearchBar
+              className="input"
+              onChange={(e) => {
+                setSearch(e.target.value.toLowerCase());
+              }}
+              value={search}
+            ></SearchBar>
+          </SearchContainer>
+        )}
         <Cart>
           <LinkCart to={'/cart'} onClick={clearSearch}>
             {cartCount !== 0 && <ItemInCart>{cartCount}</ItemInCart>}
@@ -84,15 +93,14 @@ export default Header;
 
 const Wrapper = styled.div`
   width: 100%;
-  height: fit-content;
-  min-height: 80px;
+  height: 80px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   color: white;
 `;
 
-const Logo = styled.div`
+const HomeLogo = styled.div`
   width: 5%;
   margin-left: 2%;
 `;
@@ -107,11 +115,11 @@ const HomeLink = styled(Link)`
 `;
 
 const Icons = styled.div`
-  width: 25%;
+  width: ${(props) => (props.isSearchBoxVisible ? '25%' : '10%')};
   height: 50px;
   margin-right: 2%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
 `;
 const SearchContainer = styled.div`
@@ -119,8 +127,8 @@ const SearchContainer = styled.div`
   height: 45px;
   display: flex;
   align-items: center;
-  // border: 2px solid red;
 `;
+
 const SearchIcon = styled.div`
   margin: 0 5px;
 `;
@@ -135,6 +143,7 @@ const Cart = styled.div`
   text-align: center;
   width: 20%;
   height: 25px;
+  margin: 0 10px;
   position: relative;
   :hover {
     cursor: pointer;

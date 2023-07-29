@@ -163,7 +163,7 @@ const ItemContainer = styled.div`
 const PurchaseBox = styled.div`
   background-color: white;
   width: 20%;
-  height: 95px;
+  height: 110px;
   /* margin: 340px 10px 0 20px; */
   /* border-radius: 12px; */
   display: flex;
@@ -228,10 +228,11 @@ const Stock = styled.div`
   color: gray;
 `;
 const Input = styled.input`
-  width: 30px;
-  height: 14px;
+  width: 38px;
+  height: 20px;
   margin-left: 10px;
-  font-size: 13px;
+  font-size: 15px;
+  outline: none;
 `;
 
 const CartMessage = styled(PurchaseBox)`
