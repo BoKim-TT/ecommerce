@@ -22,7 +22,7 @@ const Category = () => {
       .then((res) => res.json())
       .then((data) => {
         // setCategories basically grabs all items in the same category
-        setCategories(data.data.slice(0, 16));
+        setCategories(data.data.slice(0, 12));
         setStatus('idle');
       });
   }, [category]);
